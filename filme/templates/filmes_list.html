@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br><br>
+<center><h1 style="color: white;">Lista de Filmes</h1></center>
+
+<head>
+<link href="/static/css/main.css" rel="stylesheet" />
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+ 
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<!-- Nav Bar Letras -->
+	<nav style="margin-left:15%; ">
+	  <ul class="pagination pagination-sm">
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'a' %}">A</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'b' %}">B</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'c' %}">C</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'd' %}">D</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'e' %}">E</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'f' %}">F</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'g' %}">G</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'h' %}">H</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'i' %}">I</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'j' %}">J</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'k' %}">K</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'l' %}">L</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'm' %}">M</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'n' %}">N</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'o' %}">O</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'p' %}">P</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'q' %}">Q</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'r' %}">R</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 's' %}">S</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 't' %}">T</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'u' %}">U</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'v' %}">V</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'w' %}">W</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'x' %}">X</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'y' %}">Y</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'z' %}">Z</a></li>
+	    <li class="page-item"><a class="page-link" href="{% url 'filmes_search' 'T' %}">Todos</a></li>
+	  </ul>
+	</nav>
+
+<hr>
+
+<section class="carousel slide" data-ride="carousel" id="postsCarousel">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-md-right lead">
+                <a class="btn btn-outline-secondary prev" href="" title="go back"><i class="fa fa-lg fa-chevron-left"></i></a>
+                <a class="btn btn-outline-secondary next" href="" title="more"><i class="fa fa-lg fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-t-0 m-t-2 carousel-inner">
+
+         {% for i in dados %}
+	         {% if forloop.counter0|divisibleby:3 %}
+	         	{% if forloop.first %}
+	 	  			<div class="row row-equal carousel-item active m-t-0">
+	 	  		 {% else %}
+	 	  		  	<div class="row row-equal carousel-item m-t-0">
+	 	  	 	{% endif %}
+	 	  	 {% endif %}
+
+	        <div class="col-md-4 fadeIn wow">
+	            <div class="card">
+	                <div class="card-img-top card-img-top-250">
+	                    <img class="img-fluid" src=/{{i.imagem}}> 
+	                </div>
+	                <div class="card-block p-t-2">
+	               		<h3><a href="{{i.trailer}}" target="__blank">{{i.filme}}</a></h3>
+	                    <h6 class="text-wide p-b-2">Preço: {{i.preco}} | Disponível: {{i.disponivel}}</h6>
+	                    <h6>Ano de Lançamento: {{i.ano}}</h6>
+              			  {% if user.is_authenticated %}
+                              <a class="badge badge-success" href="{% url 'add_pedido' i.id %}"> Alugue Agora! <img src="/static/imagens/card.png/" width="30"></a>
+                          {% else %}
+                             <a class="badge badge-danger" title="Faça login para Alugar Agora!" > Alugue Agora! <img src="/static/imagens/card.png/" width="30"></a>
+                          {% endif %}
+	                    <hr>
+	                    
+	                    <h7><b>Sinopse: </b>{{i.sinopse}}</h7>
+	                   
+	                </div>
+	            </div>
+	   		</div>
+
+       		{% if forloop.counter|divisibleby:3  %}
+       			</div>
+       		{% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+<div class="scripts-carousel">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</div>
+   
+{% endblock %}

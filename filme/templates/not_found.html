@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<head>
+		<link href="static/css/main.css" rel="stylesheet" />
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+		 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+	</head>
+
+	<br><br><br>
+	<center><h1 style="color: white;">Ops! Nenhum filme encontrado</h1>
+		<br>
+		<a href="{% url 'filmes_list'%}" class="btn btn-outline-primary">Voltar</a>
+	</center>
+
+{% endblock %}
